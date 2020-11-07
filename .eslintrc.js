@@ -4,6 +4,13 @@ module.exports = {
 		es2021: true,
 	},
 	extends: ['airbnb', 'prettier/react', 'eslint-config-prettier'],
+	settings: {
+		'import/resolver': {
+			node: {
+				paths: ['src'],
+			},
+		},
+	},
 	parser: 'babel-eslint',
 	parserOptions: {
 		ecmaFeatures: {
