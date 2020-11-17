@@ -1,3 +1,23 @@
+import { createGlobalStyle } from 'styled-components';
+import { normalize } from 'styled-normalize';
+import reset from 'styled-reset';
+
+export const GlobalStyle = createGlobalStyle`
+	${normalize}
+	${reset}
+
+	*, *:before, *:after {
+    -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+            box-sizing: border-box;
+	}
+
+	body {
+		font-family: ${({ theme }) => theme.fonts.family}, sans-serif;
+		background-color: #FFFFFF;
+	}
+`;
+
 export default {
 	colors: {
 		primary: {
@@ -29,5 +49,8 @@ export default {
 			large: '20px',
 		},
 		family: 'Lato',
+	},
+	measures: {
+		verticalDistance: '16px',
 	},
 };

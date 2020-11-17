@@ -9,8 +9,11 @@
     "prop-types": "^15.7.2",
     "react": "16.13.1",
     "react-dom": "16.13.1",
+    "react-input-mask": "^3.0.0-alpha.2",
     "react-scripts": "3.4.3",
-    "styled-components": "^5.2.1"
+    "styled-components": "^5.2.1",
+    "styled-normalize": "^8.0.7",
+    "styled-reset": "^4.3.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -44,7 +47,6 @@
     "@storybook/react": "^6.0.28",
     "babel-eslint": "^10.1.0",
     "babel-loader": "^8.1.0",
-    "eslint": "^7.12.1",
     "eslint-config-airbnb": "^18.2.0",
     "eslint-config-prettier": "^6.15.0",
     "eslint-plugin-import": "^2.22.1",

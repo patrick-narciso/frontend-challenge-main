@@ -3,13 +3,14 @@ import ReactDOM from 'react-dom';
 import { ThemeProvider } from 'styled-components';
 
 import './index.css';
-import theme from 'commons/styled-components/theme';
+import theme, { GlobalStyle } from 'commons/styled-components/theme';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
 	<React.StrictMode>
 		<ThemeProvider theme={theme}>
+			<GlobalStyle />
 			<App />
 		</ThemeProvider>
 	</React.StrictMode>,
