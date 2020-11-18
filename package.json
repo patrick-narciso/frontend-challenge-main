@@ -20,11 +20,23 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --watchAll",
+    "lint": "eslint . --ext .js,.jsx --fix-dry-run",
     "test:coverage": "react-scripts test --coverage",
     "eject": "react-scripts eject",
     "server": "json-server ./server/db.json --middlewares ./server/status-middleware.js",
     "storybook": "start-storybook -p 6006 --no-dll",
     "build-storybook": "build-storybook --no-dll"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,jsx}": [
+      "npx prettier --write",
+      "yarn run lint --fix-dry-run"
+    ]
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -64,7 +76,9 @@
     "eslint-plugin-prettier": "^3.1.4",
     "eslint-plugin-react": "^7.21.5",
     "eslint-plugin-react-hooks": "^4.2.0",
+    "husky": "^4.3.0",
     "json-server": "0.16.2",
+    "lint-staged": "^10.5.1",
     "prettier": "^2.1.2",
     "react-is": "^17.0.1"
   }
