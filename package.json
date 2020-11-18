@@ -43,7 +43,8 @@
 	"jest": {
 		"collectCoverageFrom": [
 			"**/**/*.{js,jsx}",
-			"!**/*.stories.js"
+			"!**/*.stories.js",
+			"!**/commons/**/*.js"
 		]
 	},
   "devDependencies": {
