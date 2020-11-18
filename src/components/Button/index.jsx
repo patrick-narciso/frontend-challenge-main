@@ -7,6 +7,7 @@ import Primary from './Primary';
 const CustomButton = styled.button`
 	font-family: ${({ theme }) => theme.fonts.family};
 	font-size: ${({ theme }) => theme.fonts.sizes.medium};
+	line-height: 24px;
 	border: none;
 	cursor: pointer;
 	transition: all 150ms ease-in;
