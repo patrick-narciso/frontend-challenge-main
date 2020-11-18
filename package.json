@@ -10,6 +10,7 @@
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-input-mask": "^3.0.0-alpha.2",
+    "react-router-dom": "^5.2.0",
     "react-scripts": "^4.0.0",
     "styled-components": "^5.2.1",
     "styled-normalize": "^8.0.7",
@@ -18,8 +19,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-		"test": "react-scripts test --watchAll",
-		"test:coverage": "react-scripts test --coverage",
+    "test": "react-scripts test --watchAll",
+    "test:coverage": "react-scripts test --coverage",
     "eject": "react-scripts eject",
     "server": "json-server ./server/db.json --middlewares ./server/status-middleware.js",
     "storybook": "start-storybook -p 6006 --no-dll",
@@ -39,14 +40,14 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-	},
-	"jest": {
-		"collectCoverageFrom": [
-			"**/**/*.{js,jsx}",
-			"!**/*.stories.js",
-			"!**/commons/**/*.js"
-		]
-	},
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "**/**/*.{js,jsx}",
+      "!**/*.stories.js",
+      "!**/commons/**/*.js"
+    ]
+  },
   "devDependencies": {
     "@babel/core": "^7.12.3",
     "@storybook/addon-actions": "^6.0.28",
