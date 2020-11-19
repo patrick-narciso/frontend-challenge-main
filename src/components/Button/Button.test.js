@@ -3,7 +3,7 @@ import React from 'react';
 import '@testing-library/jest-dom/extend-expect';
 
 import theme from 'commons/styled-components/theme';
-import { render, screen, fireEvent } from 'commons/test-utils';
+import { renderWithTheme, screen, fireEvent } from 'commons/test-utils';
 
 import Button from '.';
 
@@ -22,8 +22,8 @@ describe('Components', () => {
 			props = createTestProps({});
 		});
 
-		test('Should render the button correctly', () => {
-			render(<Button {...props} />);
+		test('Should renderWithTheme the button correctly', () => {
+			renderWithTheme(<Button {...props} />);
 			const button = screen.getByRole('button', { name: 'Criar transação' });
 			expect(button).toHaveStyle({
 				backgroundColor: theme.colors.primary.purple[200],
@@ -31,13 +31,13 @@ describe('Components', () => {
 			expect(button).toBeInTheDocument();
 		});
 
-		test('Should render button icon', () => {
-			render(<Button {...props} icon="Mock icon" />);
+		test('Should renderWithTheme button icon', () => {
+			renderWithTheme(<Button {...props} icon="Mock icon" />);
 			expect(screen.getByRole('img')).toBeInTheDocument();
 		});
 
-		test('Should render button disabled', () => {
-			render(<Button {...props} disabled />);
+		test('Should renderWithTheme button disabled', () => {
+			renderWithTheme(<Button {...props} disabled />);
 			const button = screen.getByRole('button', { name: 'Criar transação' });
 			expect(button).toHaveStyle({
 				backgroundColor: theme.colors.neutral.gray[20],
@@ -45,7 +45,7 @@ describe('Components', () => {
 		});
 
 		test('Should handle onClick event correctly', () => {
-			render(<Button {...props} />);
+			renderWithTheme(<Button {...props} />);
 			const button = screen.getByRole('button', { name: 'Criar transação' });
 			fireEvent.click(button);
 			expect(props.onClick).toHaveBeenCalledTimes(1);

@@ -3,7 +3,7 @@ import React from 'react';
 import '@testing-library/jest-dom/extend-expect';
 
 import theme from 'commons/styled-components/theme';
-import { render, screen, fireEvent } from 'commons/test-utils';
+import { renderWithTheme, screen, fireEvent } from 'commons/test-utils';
 
 import Navbar from '.';
 
@@ -21,7 +21,7 @@ describe('Components', () => {
 		});
 
 		test('Should render the Navbar correctly', () => {
-			render(<Navbar {...props} />);
+			renderWithTheme(<Navbar {...props} />);
 			const title = screen.getByText('Nova transação');
 			const icon = screen.getByRole('presentation');
 			const header = screen.getByRole('banner');
@@ -38,7 +38,7 @@ describe('Components', () => {
 		});
 
 		test('Should handle click event correctly', () => {
-			render(<Navbar {...props} />);
+			renderWithTheme(<Navbar {...props} />);
 			fireEvent.click(screen.getByRole('presentation'));
 
 			expect(props.onBack).toHaveBeenCalledTimes(1);

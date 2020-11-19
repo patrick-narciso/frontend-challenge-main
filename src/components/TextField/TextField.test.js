@@ -2,7 +2,7 @@
 import React from 'react';
 import '@testing-library/jest-dom/extend-expect';
 
-import { render, screen, fireEvent } from 'commons/test-utils';
+import { renderWithTheme, screen, fireEvent } from 'commons/test-utils';
 
 import TextField, { Label, Input } from '.';
 
@@ -39,7 +39,7 @@ describe('Components', () => {
 		});
 
 		test('Should render the label floating', () => {
-			const { rerender } = render(<TextField {...props} />);
+			const { rerender } = renderWithTheme(<TextField {...props} />);
 			const textFieldInput = screen.getByTestId('textfield');
 			fireEvent.change(textFieldInput, { target: { value: 'user input' } });
 			rerender(<TextField {...props} value="user input" />);
@@ -49,21 +49,21 @@ describe('Components', () => {
 		});
 
 		test('Should handle blur event correctly', () => {
-			render(<TextField {...props} />);
+			renderWithTheme(<TextField {...props} />);
 			const textFieldInput = screen.getByTestId('textfield');
 			fireEvent.focusOut(textFieldInput);
 			expect(setState).toHaveBeenCalledWith(false);
 		});
 
 		test('Should handle focus event correctly', () => {
-			render(<TextField {...props} />);
+			renderWithTheme(<TextField {...props} />);
 			const textFieldInput = screen.getByTestId('textfield');
 			fireEvent.focus(textFieldInput);
 			expect(setState).toHaveBeenCalledWith(true);
 		});
 
 		test('Should render label positioned correctly', () => {
-			render(<Label $active>Label test</Label>);
+			renderWithTheme(<Label $active>Label test</Label>);
 			expect(screen.getByText('Label test')).toHaveStyle({
 				transform: 'translateY(-19px)',
 				backgroundColor: '#ffffff',
@@ -73,7 +73,7 @@ describe('Components', () => {
 		});
 
 		test('Should render input border color correctly', () => {
-			render(<Input $active />);
+			renderWithTheme(<Input $active />);
 			expect(screen.getByRole('textbox')).toHaveStyle({
 				borderColor: '#595A63',
 			});
