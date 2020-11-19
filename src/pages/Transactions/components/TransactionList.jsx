@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import { format } from 'date-fns';
 
 const TransactionList = styled.ul`
 	list-style: none;
@@ -42,16 +43,21 @@ const ContainerInfo = styled.div`
 `;
 
 const Transactions = ({ transactions }) => {
+	const statusDict = {
+		paid: 'Paga',
+		refused: 'Recusada',
+	};
+
 	return (
 		<TransactionList>
-			{transactions.map(({ name, date, status, amount }) => (
-				<TransactionItem>
+			{transactions.map(({ id, name, date, status, amount }) => (
+				<TransactionItem key={id}>
 					<ContainerInfo>
 						<Name>{name}</Name>
-						<Date>{date}</Date>
+						<Date>{date ? format(date, 'dd/MM/yyyy HH:mm') : '-'}</Date>
 					</ContainerInfo>
 					<ContainerInfo>
-						<Status>{status}</Status>
+						<Status>{status ? statusDict[status] : '-'}</Status>
 						<Value>
 							{Number(amount).toLocaleString('pt-br', {
 								style: 'currency',
@@ -68,8 +74,9 @@ const Transactions = ({ transactions }) => {
 Transactions.propTypes = {
 	transactions: PropTypes.arrayOf(
 		PropTypes.shape({
+			id: PropTypes.number,
 			name: PropTypes.string,
-			date: PropTypes.string,
+			date: PropTypes.number,
 			status: PropTypes.string,
 			amount: PropTypes.number,
 		})

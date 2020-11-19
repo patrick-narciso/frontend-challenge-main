@@ -1,12 +1,14 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
+import Transactions from 'pages/Transactions';
+
 function App() {
 	return (
 		<Router>
 			<Switch>
 				<Route exact path="/">
-					<div>Hello World!</div>
+					<Transactions />
 				</Route>
 				<Route exact path="/transacoes/nova">
 					<div>Criar transação</div>
