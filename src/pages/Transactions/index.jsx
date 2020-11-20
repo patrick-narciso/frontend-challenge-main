@@ -33,15 +33,19 @@ const Transactions = () => {
 	const history = useHistory();
 	const dispatch = useDispatch();
 	const isOnline = useOnlineStatus();
-	const { transactions, transactionsFetched, loading, error } = useSelector(
-		(state) => state.transactions
-	);
+	const {
+		transactions,
+		transactionsFetched,
+		transactionCreated,
+		loading,
+		error,
+	} = useSelector((state) => state.transactions);
 	const totalTransactions = transactions.length;
 	const totalValue = transactions.reduce((acc, curr) => acc + curr.amount, 0);
 	const transactionsList = transactions.map((transaction) => ({
 		id: transaction?.id,
 		name: transaction?.credit_card_holder_name,
-		date: transaction?.date,
+		date: transaction?.created_at,
 		status: transaction?.status,
 		amount: transaction?.amount,
 	}));
@@ -81,13 +85,18 @@ const Transactions = () => {
 						totalValue={totalValue}
 					/>
 					<TransactionList transactions={transactionsList} />
-					<Disclaimer>Você não possui nenhuma transação</Disclaimer>
+					{transactionsList.length === 0 && (
+						<Disclaimer>Você não possui nenhuma transação</Disclaimer>
+					)}
 					<ContainerButton>
 						<Button onClick={goToNewTransaction} icon={AddFilled}>
 							Criar transação
 						</Button>
 					</ContainerButton>
 					{handleErrorMessage()}
+					{transactionCreated && (
+						<Snackbar message="transação criada com sucesso" />
+					)}
 				</>
 			)}
 		</>

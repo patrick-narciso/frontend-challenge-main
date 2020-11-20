@@ -7,7 +7,9 @@ const initialState = {
 	transactions: [],
 	transactionsFetched: false,
 	loading: false,
+	transactionCreated: null,
 	error: null,
+	createdError: null,
 };
 
 const transactions = createSlice({
@@ -30,6 +32,25 @@ const transactions = createSlice({
 			state.loading = false;
 			state.error = action.payload;
 		},
+		transactionCreateStart(state) {
+			state.loading = true;
+			state.createdError = null;
+		},
+		transactionCreateSuccess(state, action) {
+			state.transactionCreated = action.payload;
+			state.transactions = [action.payload, ...state.transactions];
+			state.loading = false;
+			state.createdError = null;
+		},
+		transactionCreateFailure(state, action) {
+			state.transactionCreated = null;
+			state.loading = false;
+			state.createdError = action.payload;
+		},
+		transactionCreateReset(state) {
+			state.createdError = null;
+			state.transactionCreated = null;
+		},
 	},
 });
 
@@ -37,6 +58,10 @@ export const {
 	transactionsFetchStart,
 	transactionsFetchSuccess,
 	transactionsFetchFailure,
+	transactionCreateStart,
+	transactionCreateSuccess,
+	transactionCreateFailure,
+	transactionCreateReset,
 } = transactions.actions;
 
 export const getAllTransactions = () => async (dispatch) => {
@@ -50,6 +75,18 @@ export const getAllTransactions = () => async (dispatch) => {
 				message: err?.response?.message,
 				status: err?.response?.status,
 			})
+		);
+	}
+};
+
+export const createTransaction = (transaction) => async (dispatch) => {
+	try {
+		dispatch(transactionCreateStart());
+		const transactionResponse = await TransactionsService.create(transaction);
+		dispatch(transactionCreateSuccess(transactionResponse));
+	} catch (err) {
+		dispatch(
+			transactionCreateFailure('Ocorreu um problema ao criar a transação')
 		);
 	}
 };

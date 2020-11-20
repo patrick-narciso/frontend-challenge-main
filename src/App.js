@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import Transactions from 'pages/Transactions';
+import NewTransaction from 'pages/Transactions/New';
 
 function App() {
 	return (
@@ -11,7 +12,7 @@ function App() {
 					<Transactions />
 				</Route>
 				<Route exact path="/transacoes/nova">
-					<div>Criar transação</div>
+					<NewTransaction />
 				</Route>
 				<Route path="*">
 					<div>Not found!</div>
