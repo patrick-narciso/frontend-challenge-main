@@ -7,7 +7,7 @@ const initialState = {
 	transactions: [],
 	transactionsFetched: false,
 	loading: false,
-	transactionCreated: null,
+	transactionCreated: false,
 	error: null,
 	createdError: null,
 };
@@ -37,19 +37,19 @@ const transactions = createSlice({
 			state.createdError = null;
 		},
 		transactionCreateSuccess(state, action) {
-			state.transactionCreated = action.payload;
+			state.transactionCreated = true;
 			state.transactions = [action.payload, ...state.transactions];
 			state.loading = false;
 			state.createdError = null;
 		},
 		transactionCreateFailure(state, action) {
-			state.transactionCreated = null;
+			state.transactionCreated = false;
 			state.loading = false;
 			state.createdError = action.payload;
 		},
 		transactionCreateReset(state) {
 			state.createdError = null;
-			state.transactionCreated = null;
+			state.transactionCreated = false;
 		},
 	},
 });

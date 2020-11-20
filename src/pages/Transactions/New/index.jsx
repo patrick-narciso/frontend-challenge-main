@@ -50,16 +50,21 @@ const NewTransaction = () => {
 	);
 	const formik = useFormik(formikConfig);
 
-	useEffect(() => {
-		return () => dispatch(transactionCreateReset());
-	}, []);
-
 	const goToHome = () => history.push('/');
+
+	useEffect(() => {
+		if (!createdError && transactionCreated) goToHome();
+	}, [createdError, transactionCreated]);
+
+	useEffect(() => {
+		return () => {
+			dispatch(transactionCreateReset());
+		};
+	}, []);
 
 	const handleSubmit = async () => {
 		const payload = normalizeTransactionPayload({ ...formik.values, amount });
 		await dispatch(createTransaction(payload));
-		if (!createdError && transactionCreated) goToHome();
 	};
 
 	const handleAmountChange = (e, value) => {
