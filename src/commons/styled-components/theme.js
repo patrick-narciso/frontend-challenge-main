@@ -29,6 +29,9 @@ export default {
 			green: {
 				100: '#65A300',
 			},
+			pink: {
+				100: '#df285f',
+			},
 		},
 		neutral: {
 			gray: {

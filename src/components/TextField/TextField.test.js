@@ -62,20 +62,35 @@ describe('Components', () => {
 			expect(setState).toHaveBeenCalledWith(true);
 		});
 
+		test('Should render currency input', () => {
+			renderWithTheme(<TextField {...props} currency />);
+			const textFieldInput = screen.getByTestId('currency-textfield');
+			expect(setState).toHaveBeenCalledWith(true);
+			expect(textFieldInput.value).toBe('0');
+		});
+
 		test('Should render label positioned correctly', () => {
-			renderWithTheme(<Label $active>Label test</Label>);
+			const { rerender } = renderWithTheme(<Label $active>Label test</Label>);
 			expect(screen.getByText('Label test')).toHaveStyle({
 				transform: 'translateY(-19px)',
 				backgroundColor: '#ffffff',
 				padding: '0px 4px 2px 4px',
 				left: '10px',
 			});
+			rerender(<Label $error>Label test</Label>);
+			expect(screen.getByText('Label test')).toHaveStyle({
+				color: '#df285f',
+			});
 		});
 
 		test('Should render input border color correctly', () => {
-			renderWithTheme(<Input $active />);
+			const { rerender } = renderWithTheme(<Input $active />);
 			expect(screen.getByRole('textbox')).toHaveStyle({
 				borderColor: '#595A63',
+			});
+			rerender(<Input $active $error />);
+			expect(screen.getByRole('textbox')).toHaveStyle({
+				borderColor: '#df285f',
 			});
 		});
 	});
