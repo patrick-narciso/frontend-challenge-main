@@ -33,7 +33,30 @@ const Icon = styled.img`
 	margin-right: 10px;
 `;
 
-const Button = ({ variant, children, onClick, disabled, icon }) => {
+const LoadingIcon = styled.i`
+	margin-right: 10px;
+`;
+
+const Button = ({ variant, children, onClick, disabled, icon, loading }) => {
+	const renderChildren = () => {
+		if (loading) {
+			return (
+				<Container>
+					<LoadingIcon data-testid="loader" className="fa fa-refresh fa-spin" />
+					{children}
+				</Container>
+			);
+		}
+		if (icon) {
+			return (
+				<Container>
+					<Icon src={icon} alt="button icon" />
+					{children}
+				</Container>
+			);
+		}
+		return children;
+	};
 	return (
 		<CustomButton
 			type="button"
@@ -41,14 +64,7 @@ const Button = ({ variant, children, onClick, disabled, icon }) => {
 			onClick={onClick}
 			disabled={disabled}
 		>
-			{icon ? (
-				<Container>
-					<Icon src={icon} alt="button icon" />
-					{children}
-				</Container>
-			) : (
-				children
-			)}
+			{renderChildren()}
 		</CustomButton>
 	);
 };
@@ -57,6 +73,7 @@ Button.defaultProps = {
 	variant: 'primary',
 	disabled: false,
 	icon: '',
+	loading: false,
 };
 
 Button.propTypes = {
@@ -65,6 +82,7 @@ Button.propTypes = {
 	disabled: PropTypes.bool,
 	icon: PropTypes.string,
 	onClick: PropTypes.func.isRequired,
+	loading: PropTypes.bool,
 };
 
 export default Button;

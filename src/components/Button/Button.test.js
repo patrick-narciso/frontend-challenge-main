@@ -31,12 +31,17 @@ describe('Components', () => {
 			expect(button).toBeInTheDocument();
 		});
 
-		test('Should renderWithTheme button icon', () => {
+		test('Should render button icon', () => {
 			renderWithTheme(<Button {...props} icon="Mock icon" />);
 			expect(screen.getByRole('img')).toBeInTheDocument();
 		});
 
-		test('Should renderWithTheme button disabled', () => {
+		test('Should render button loading', () => {
+			renderWithTheme(<Button {...props} loading />);
+			expect(screen.getByTestId('loader')).toBeInTheDocument();
+		});
+
+		test('Should render button disabled', () => {
 			renderWithTheme(<Button {...props} disabled />);
 			const button = screen.getByRole('button', { name: 'Criar transação' });
 			expect(button).toHaveStyle({
